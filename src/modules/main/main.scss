@@ -1,0 +1,102 @@
+$radius: 40px 100%;
+$transition-flex: flex-basis .3s ease;
+$transition-bg: background-color .3s ease;
+$dark: rgba(0,0,0, .5);
+$light: rgba(0,0,0, .3);
+$lighten: rgba(212, 212, 212, 0.13);
+$transparent: rgba(0,0,0,0);
+$offset: 20px;
+*{
+  box-sizing: border-box;
+}
+body{
+  background: url('img/bg.jpg') left top no-repeat;
+}
+
+.device-list{
+  list-style-type: disc;
+  .device{
+    margin: 10px;
+    padding: 10px;
+    background-color: red;
+    &.active{
+      background-color: green;
+    }
+  }
+  .device-display{
+    max-height: 600px;
+    overflow-y: auto;
+  }
+}
+ul{
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.content{
+  display: flex;
+  flex: 100%;
+  position: relative;
+  height: 100vh;
+  transition: $transition-bg;
+  background-color: $dark;
+  &.extras{
+    background-color: $transparent;
+    transition: $transition-bg;
+    .radius-outer{
+      box-shadow: 0 0 2px 1px #ffb43e;
+      flex-basis: 20%;
+      transition: $transition-flex;
+      &:before{
+        background-color: $dark;
+        transition: $transition-bg;
+      }
+    }
+    .radius-inner{
+      flex-basis: 80%;
+      transition:  $transition-flex;
+    }
+  }
+}
+.radius-outer{
+  overflow: hidden;
+  height: inherit;
+  border-top-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+  display: flex;
+  flex: 1 0 80%;
+  flex-direction: column;
+  justify-content: space-around;
+  background: url('img/bg.jpg') left top no-repeat;
+  position: relative;
+  transition: $transition-flex;
+  border-right: 2px solid #e88e00;
+  box-shadow: inset 0 0 2px 1px #ffb43e;
+  &:before{
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $transparent;
+    transition: $transition-bg;
+  }
+}
+.radius-inner{
+  overflow: hidden;
+  margin-left: -$offset;
+  display: flex;
+  flex: 0 1 20%;
+  transition: $transition-flex;
+  padding-left: $offset;
+}
+.controls{
+  z-index: 1;
+  .btn-control{
+    color: white;
+  }
+}
+

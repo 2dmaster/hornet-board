@@ -1,0 +1,54 @@
+{
+  "name": "script-manager",
+  "version": "1.0.0",
+  "description": "Inject analytics scrips",
+  "main": "index.js",
+  "scripts": {
+    "webpack-build": "webpack --env.NODE_ENV=development --config webpack.config.js",
+    "webpack-dev": "webpack --env.NODE_ENV=development --config webpack.config.js --watch",
+    "cordova-android": "npm run webpack-build && cordova build android"
+  },
+  "author": "2dmaster",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^7.2.1",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.5",
+    "html-loader": "^0.5.1",
+    "img-loader": "^2.0.0",
+    "node-sass": "^4.7.2",
+    "postcss-loader": "^2.0.9",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "url-loader": "^0.6.2",
+    "webpack": "3.9.1"
+  },
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.11",
+    "angular": "^1.6.7",
+    "angular-deferred-bootstrap": "^0.1.9",
+    "angular-local-storage": "^0.7.1",
+    "angularjs-slider": "^6.4.3",
+    "cordova-android": "^6.1.0",
+    "cordova-plugin-bluetooth-serial": "^0.4.7",
+    "cordova-plugin-crosswalk-webview": "^2.3.0"
+  },
+  "cordova": {
+    "platforms": [
+      "android"
+    ],
+    "plugins": {
+      "cordova-plugin-crosswalk-webview": {
+        "XWALK_VERSION": "23+",
+        "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
+        "XWALK_COMMANDLINE": "--disable-pull-to-refresh-effect",
+        "XWALK_MODE": "embedded",
+        "XWALK_MULTIPLEAPK": "true"
+      },
+      "cordova-plugin-bluetooth-serial": {}
+    }
+  }
+}
