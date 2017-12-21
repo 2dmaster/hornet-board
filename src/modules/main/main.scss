@@ -56,6 +56,12 @@ ul{
       flex-basis: 80%;
       transition:  $transition-flex;
     }
+    .controls{
+      flex-direction: column;
+      .btn-control{
+        flex: 1;
+      }
+    }
   }
 }
 .radius-outer{
@@ -95,7 +101,14 @@ ul{
 }
 .controls{
   z-index: 1;
+  display: flex;
+  flex: 100%;
+  flex-wrap: wrap;
   .btn-control{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex: 1 1 50%;
     color: white;
   }
 }
