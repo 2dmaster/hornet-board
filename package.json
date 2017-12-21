@@ -31,23 +31,13 @@
     "angular": "^1.6.7",
     "angular-deferred-bootstrap": "^0.1.9",
     "angular-local-storage": "^0.7.1",
-    "angularjs-slider": "^6.4.3",
-    "cordova-android": "^6.1.0",
-    "cordova-plugin-bluetooth-serial": "^0.4.7",
-    "cordova-plugin-crosswalk-webview": "^2.3.0"
+    "angularjs-slider": "^6.4.3"
   },
   "cordova": {
     "platforms": [
       "android"
     ],
     "plugins": {
-      "cordova-plugin-crosswalk-webview": {
-        "XWALK_VERSION": "23+",
-        "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
-        "XWALK_COMMANDLINE": "--disable-pull-to-refresh-effect",
-        "XWALK_MODE": "embedded",
-        "XWALK_MULTIPLEAPK": "true"
-      },
       "cordova-plugin-bluetooth-serial": {}
     }
   }

@@ -4,4 +4,5 @@
 /plugins/
 /platforms/
 /www/
+!/www/index.html
 .idea
