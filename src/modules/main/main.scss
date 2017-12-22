@@ -1,99 +1,81 @@
-$radius: 40px 100%;
-$transition-flex: transform .3s ease;
-$dark: rgba(0,0,0, .5);
-$light: rgba(0,0,0, .3);
-$lighten: rgba(212, 212, 212, 0.13);
-$transparent: rgba(0,0,0,0);
-$offset: 20px;
 *{
   box-sizing: border-box;
-}
-body{
-  background: url('img/bg.jpg') left top no-repeat;
+  -webkit-touch-callout:none;                /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust:none;             /* prevent webkit from resizing text to fit */
+  -webkit-tap-highlight-color:transparent; /* prevent tap highlight color / shadow */
+  -webkit-user-select:none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
 }
 
-.device-list{
-  list-style-type: disc;
-  .device{
-    margin: 10px;
-    padding: 10px;
-    background-color: red;
-    &.active{
-      background-color: green;
-    }
-  }
-  .device-display{
-    max-height: 600px;
-    overflow-y: auto;
-  }
-}
 ul{
+  list-style: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 .content{
   position: relative;
   overflow: hidden;
   height: 100%;
-  background-color: $dark;
   &.extras{
-    background-color: $transparent;
-    .radius-outer{
-      transform: translateX(-75%);
-      transition: $transition-flex;
-      &:before{
-        background-color: $dark;
-      }
-    }
-    .radius-inner{
-      transform: translateX(0);
-      transition:  $transition-flex;
-    }
     .controls{
-      .btn-control{
+      width: 20%;
+      .control{
+        width: 100%;
+        height: 25%;
       }
     }
+    .control-extras{
+      display: block;
+      width: 65%;
+    }
   }
-}
-.radius-outer{
-  width: 80%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  overflow: hidden;
-  height: inherit;
-  border-top-right-radius: $radius;
-  border-bottom-right-radius: $radius;
-  transition: $transition-flex;
-  border-right: 2px solid #e88e00;
-  &:before{
-    content: '';
-    display: block;
-    position: absolute;
-    z-index: 0;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background-color: $transparent;
-  }
-}
-.radius-inner{
-  width: 80%;
-  right: 0;
-  top: 0;
-  transform: translateX(75%);
-  overflow: hidden;
-  height: inherit;
-  position: absolute;
-  transition: $transition-flex;
 }
 .controls{
-  position: relative;
-  z-index: 1;
-  .btn-control{
+  width: 85%;
+  height: inherit;
+  float: left;
+  background-image: linear-gradient(to right, #000000 0%, #1c1c1c 100%);
+}
+.control-extras,
+.status-bar{
+  width: 15%;
+  height: inherit;
+  float: left;
+  background-image: linear-gradient(to right, #000000 0%,#1c1c1c 100%);
+}
+.control-extras{
+  display: none;
+}
+.status-bar{
+  float: right;
+  .status{
+    width: 100%;
+    height: 25%;
+    float: left;
+    text-align: center;
     color: white;
+  }
+}
+.controls{
+  .control{
+    width: 50%;
+    height: 50%;
+    padding: 10px;
+    text-align: center;
+    float: left;
+    .btn-control{
+      border-radius: 6px;
+      width: 100%;
+      height: 100%;
+      background-color: #eaeae9;
+      border-bottom: 8px solid #a9a9a9;
+      border-top: 1px solid #a0a0a0;
+      border-left: 1px solid #e2e2e0;
+      border-right: 1px solid #ababab;
+      &.active{
+        border-bottom: 1px solid #a9a9a9;
+        border-top: 8px solid #a0a0a0;
+      }
+    }
   }
 }
 

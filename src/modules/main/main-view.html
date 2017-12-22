@@ -29,35 +29,54 @@
 <!--</ul>-->
 
 <div class="content" ng-class="{extras: control.extras}">
-    <div class="radius-outer">
-        <ul class="controls">
-            <li class="btn-control" ng-click="toggleControl()">
-                AMP
-            </li>
-            <li class="btn-control" ng-click="toggleControl()">
-                LIGHT
-            </li>
-            <li class="btn-control">
-                ILU
-            </li>
-            <li class="btn-control">
-                TRUNC
-            </li>
-        </ul>
-    </div>
-    <div class="radius-inner">
-        <ul class="control-extras">
-            <li class="extra">
-                12V
-            </li>
-            <li class="extra">
-                12V
-            </li>
-            <li class="extra">
-                12V
-            </li>
-        </ul>
-    </div>
+    <ul class="controls">
+        <li class="control">
+            <div class="btn-control" ng-click="toggleControl()" ng-class="{'active':control.extras}"></div>
+        </li>
+        <li class="control">
+            <div class="btn-control" ng-click="togg = !togg" ng-class="{'active':togg}"></div>
+        </li>
+        <li class="control">
+            <div class="btn-control"></div>
+        </li>
+        <li class="control">
+            <div class="btn-control"></div>
+        </li>
+        <li class="control">
+            <div class="btn-control"></div>
+        </li>
+        <li class="control">
+            <div class="btn-control"></div>
+        </li>
+        <li class="control">
+            <div class="btn-control"></div>
+        </li>
+        <li class="control">
+            <div class="btn-control"></div>
+        </li>
+    </ul>
+    <ul class="control-extras">
+        <li class="extra">
+            12V
+        </li>
+        <li class="extra">
+            12V
+        </li>
+        <li class="extra">
+            12V
+        </li>
+    </ul>
+    <ul class="status-bar">
+        <li class="status">
+            12V
+        </li><li class="status">
+            20L
+        </li><li class="status">
+            1.2A
+        </li><li class="status">
+            1.8P
+        </li>
+    </ul>
 </div>
 
 

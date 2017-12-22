@@ -3,6 +3,7 @@
 /hooks/
 /plugins/
 /platforms/
-/www/
 !/www/index.html
 .idea
+/www/
+reactHornet/

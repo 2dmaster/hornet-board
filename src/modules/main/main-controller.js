@@ -6,73 +6,73 @@ export default function mainCtrl($scope, $state, $bluetooth, $loading){
     $scope.toggleControl = function () {
         $scope.control.extras = !$scope.control.extras;
     };
- // var
- //     ON = '1',
- //     OFF = '2',
- //    // end common constants
- //
- //    // device config
- //     AMP = '4',
- //     ILLUMINATION = '5',
- //     LIGHT_L = '6',
- //     LIGHT_R = 9,
- //     LIGHT_BOTH = '11';
- //
- //
- //    $scope.bothSlider = {
- //        value: 0,
- //        options: {
- //            floor: 0,
- //            ceil: 255,
- //            step: 1,
- //            id: 'slider-id1',
- //            onChange: function(id, newVal) {
- //                $scope.send(LIGHT_BOTH+';'+newVal+';');
- //                    // .then(function () {
- //                    //     $scope.send(newVal);
- //                    // }, function (err) {
- //                    //     console.log(err);
- //                    // })
- //            },
- //        }
- //    };
- //
- //    $scope.leftSlider = {
- //        value: 0,
- //        options: {
- //            floor: 0,
- //            ceil: 255,
- //            step: 1,
- //            id: 'slider-id2',
- //            onChange: function(id, newVal) {
- //                $scope.send(LIGHT_L+';'+newVal+';');
- //
- //                    // .then(function () {
- //                    //     $scope.send(newVal);
- //                    // }, function (err) {
- //                    //     console.log(err);
- //                    // })
- //            },
- //        }
- //    };
- //
- //    $scope.rightSlider = {
- //        value: 0,
- //        options: {
- //            floor: 0,
- //            ceil: 255,
- //            step: 1,
- //            id: 'slider-id3',
- //            onChange: function(id, newVal) {
- //                $scope.send(LIGHT_R+';'+newVal+';')
- //                    // .then(function () {
- //                    //     $scope.send(newVal);
- //                    // }, function (err) {
- //                    //     console.log(err);
- //                    // })
- //            },
- //        }
- //    };
+ var
+     ON = '1',
+     OFF = '2',
+    // end common constants
+
+    // device config
+     AMP = '4',
+     ILLUMINATION = '5',
+     LIGHT_L = '6',
+     LIGHT_R = 9,
+     LIGHT_BOTH = '11';
+
+
+    $scope.bothSlider = {
+        value: 0,
+        options: {
+            floor: 0,
+            ceil: 255,
+            step: 1,
+            id: 'slider-id1',
+            onChange: function(id, newVal) {
+                // $scope.send(LIGHT_BOTH+';'+newVal+';');
+                    // .then(function () {
+                    //     $scope.send(newVal);
+                    // }, function (err) {
+                    //     console.log(err);
+                    // })
+            },
+        }
+    };
+
+    // $scope.leftSlider = {
+    //     value: 0,
+    //     options: {
+    //         floor: 0,
+    //         ceil: 255,
+    //         step: 1,
+    //         id: 'slider-id2',
+    //         onChange: function(id, newVal) {
+    //             $scope.send(LIGHT_L+';'+newVal+';');
+    //
+    //                 // .then(function () {
+    //                 //     $scope.send(newVal);
+    //                 // }, function (err) {
+    //                 //     console.log(err);
+    //                 // })
+    //         },
+    //     }
+    // };
+    //
+    // $scope.rightSlider = {
+    //     value: 0,
+    //     options: {
+    //         floor: 0,
+    //         ceil: 255,
+    //         step: 1,
+    //         id: 'slider-id3',
+    //         onChange: function(id, newVal) {
+    //             $scope.send(LIGHT_R+';'+newVal+';')
+    //                 // .then(function () {
+    //                 //     $scope.send(newVal);
+    //                 // }, function (err) {
+    //                 //     console.log(err);
+    //                 // })
+    //         },
+    //     }
+    // };
  //    $bluetooth.isEnabled()
  //        .then($bluetooth.getBoundedDevices, function (err) {
  //            $bluetooth.enable()

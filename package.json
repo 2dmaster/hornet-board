@@ -31,7 +31,8 @@
     "angular": "^1.6.7",
     "angular-deferred-bootstrap": "^0.1.9",
     "angular-local-storage": "^0.7.1",
-    "angularjs-slider": "^6.4.3"
+    "angularjs-slider": "^6.4.3",
+    "cordova-plugin-bluetooth-serial": "^0.4.7"
   },
   "cordova": {
     "platforms": [
