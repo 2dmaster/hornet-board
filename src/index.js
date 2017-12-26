@@ -9,6 +9,7 @@ var hornetBoard = angular.module('hornetBoard', [
     'ui.router',
     'LocalStorageModule',
     'rzModule',
+    'pr.longpress',
     bluetoothModule,
     httpIndicator,
     main

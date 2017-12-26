@@ -1,7 +1,6 @@
 {
-  "name": "script-manager",
+  "name": "hornet-board",
   "version": "1.0.0",
-  "description": "Inject analytics scrips",
   "main": "index.js",
   "scripts": {
     "webpack-build": "webpack --env.NODE_ENV=development --config webpack.config.js",
@@ -31,8 +30,8 @@
     "angular": "^1.6.7",
     "angular-deferred-bootstrap": "^0.1.9",
     "angular-local-storage": "^0.7.1",
-    "angularjs-slider": "^6.4.3",
-    "cordova-plugin-bluetooth-serial": "^0.4.7"
+    "angular-long-press": "^0.3.2",
+    "angularjs-slider": "^6.4.3"
   },
   "cordova": {
     "platforms": [
