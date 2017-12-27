@@ -32,16 +32,22 @@
     <ul class="controls">
         <li class="control" ng-repeat="control in controls" ng-class="{'active':control.active}">
             <div class="btn-control" ng-click="control.action(control)" on-long-press="selectExtras(control.extras)">
-                <i class="btn-icon" ng-bind-html="control.icon">
-                </i>
+                <i class="btn-icon" ng-bind-html="control.icon"></i>
+                <div class="btn-text">{{::control.name}}</div>
             </div>
         </li>
     </ul>
     <ul class="control-extras">
         <li class="extra" ng-repeat="control in currentExtras.controls">
-            <p class="control-text">{{::control.name}}</p>
-            <rzslider rz-slider-model="control.config.value"
-                      rz-slider-options="control.config.options"></rzslider>
+            <div ng-if="control.name.toLowerCase() != 'strobe'">
+                <p class="control-text">{{::control.name}}</p>
+                <rzslider rz-slider-model="control.config.value"
+                          rz-slider-options="control.config.options"></rzslider>
+            </div>
+            <div ng-if="control.name.toLowerCase() == 'strobe'">
+                <p class="control-text">Strobe</p>
+                <input type="checkbox" ng-true-value="'11;999;'" ng-false-value="'11;255;'" ng-model="control.command" ng-change="send(control.command)">
+            </div>
         </li>
     </ul>
     <ul class="main-menu">

@@ -10,3 +10,18 @@ html, body, .router{
 .root{
   height: inherit;
 }
+.rzslider{
+  margin: 15px 0 15px;
+  .rz-pointer{
+    top: -10px;
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    &:after{
+      display: none;
+    }
+  }
+  .rz-bubble{
+    display: none;
+  }
+}

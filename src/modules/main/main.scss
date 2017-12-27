@@ -66,6 +66,7 @@ ul{
 .control-extras,
 .main-menu{
   display: none;
+  padding: 5px 10px;
 }
 .status-bar{
   float: right;
@@ -91,7 +92,6 @@ ul{
 }
 
 .main-menu{
-  padding: 5px;
   .menu-item{
     color: white;
     &.active{
@@ -110,24 +110,41 @@ ul{
     float: left;
     &.active{
       .btn-icon{
-        svg path{
-          fill: yellow!important;
+        svg{
+          path{
+            fill: yellow;
+          }
         }
       }
     }
     .btn-control{
       width: 100%;
       height: 100%;
-      .btn-icon,
+      .btn-icon{
+        display: block;
+        width:50%;
+        height: 75%;
+        margin: 0 auto;
+      }
+      .btn-text{
+        margin-top: 5px;
+        color: white;
+        text-transform: uppercase;
+        text-align: center;
+      }
       svg{
         display: block;
         width: 100%;
-        height: 110px;
+        height: 100%;
+        path{
+          fill: white;
+        }
       }
     }
   }
 }
 .control-text{
+  margin: 0 0 5px 0;
   color:white;
 }
 

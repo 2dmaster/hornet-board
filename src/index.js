@@ -4,6 +4,7 @@ import run from './run.js';
 import httpIndicator from './services/http-loading-indicator';
 import bluetoothModule from './services/bluetooth'
 import main from './modules/main';
+import iconsModule from './services/icons';
 
 var hornetBoard = angular.module('hornetBoard', [
     'ui.router',
@@ -12,6 +13,7 @@ var hornetBoard = angular.module('hornetBoard', [
     'pr.longpress',
     bluetoothModule,
     httpIndicator,
+    iconsModule,
     main
 ]),
     appBootstrap = function () {
