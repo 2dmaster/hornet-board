@@ -1,6 +1,7 @@
 var path = require('path'),
     webpack = require('webpack'),
-    autoprefixer = require('autoprefixer');
+    autoprefixer = require('autoprefixer'),
+    ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = function(env) {
     return {
         devtool:env.NODE_ENV == 'development' ? '#eval' : false,
@@ -18,7 +19,8 @@ module.exports = function(env) {
             new webpack.LoaderOptionsPlugin({
                 minimize: true,
                 debug: false
-            })
+            }),
+            new ExtractTextPlugin('[name].min.css')
         ],
         output: {
             filename: '[name].min.js',
@@ -61,27 +63,28 @@ module.exports = function(env) {
                 },
                 {
                     test: /\.(css|scss)$/,
-                    use:[
-                        {
-                            loader: 'style-loader'
-                        },
-                        {
-                            loader: 'css-loader'
-                        },
-                        {
-                            loader:'sass-loader'
-                        },
-                        {
-                            loader:'postcss-loader',
-                            options: {
-                                plugins: function () {
-                                    return [
-                                        autoprefixer
-                                    ];
+                    use:ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: [
+                            {
+                                loader: 'css-loader'
+                            },
+                            {
+                                loader:'sass-loader'
+                            },
+                            {
+                                loader:'postcss-loader',
+                                options: {
+                                    ident: 'postcss',
+                                    plugins: function () {
+                                        return [
+                                            autoprefixer
+                                        ];
+                                    }
                                 }
                             }
-                        }
-                    ]
+                        ]
+                    })
                 }
             ]
         }
