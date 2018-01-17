@@ -1,15 +1,11 @@
 import view from './main-view.html';
 import mainCtrl from './main-controller';
-mainConfig.$inject = ['$stateProvider'];
+mainConfig.$inject = ['$routeProvider'];
 
-export default function mainConfig($stateProvider){
-    $stateProvider
-        .state('main', {
-            url: '/',
+export default function mainConfig($routeProvider){
+    $routeProvider
+        .when('/', {
             controller: mainCtrl,
-            template: view,
-            data:{
-                className:'main'
-            }
+            template: view
         });
 }

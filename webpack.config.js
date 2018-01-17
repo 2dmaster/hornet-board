@@ -28,16 +28,16 @@ module.exports = function(env) {
         },
         module: {
             rules: [
-                {
-                    test: /\.js$/,
-                    exclude: /(bower_components)/,
-                    use: {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['babel-preset-env']
-                        }
-                    }
-                },
+                // {
+                //     test: /\.js$/,
+                //     exclude: /(bower_components)/,
+                //     use: {
+                //         loader: 'babel-loader',
+                //         options: {
+                //             presets: ['babel-preset-env']
+                //         }
+                //     }
+                // },
                 {
                     test: /\.html$/,
                     use:[
@@ -49,7 +49,7 @@ module.exports = function(env) {
                 {
                     test: /\.(jpe?g|png|gif|svg)$/i,
                     use: [
-                        'url-loader?limit=1000&name=[name].[ext]',
+                        'url-loader?limit=1000&name=img/[name].[ext]',
                         'img-loader'
                     ]
                 },

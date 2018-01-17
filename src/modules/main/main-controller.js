@@ -1,5 +1,5 @@
-mainCtrl.$inject = ['$scope', '$state', '$bluetooth', 'indicatorStatusService', '$icons'];
-export default function mainCtrl($scope, $state, $bluetooth, $loading, $icons){
+mainCtrl.$inject = ['$scope', '$bluetooth', 'indicatorStatusService', '$icons'];
+export default function mainCtrl($scope, $bluetooth, $loading, $icons){
     $scope.currentExtras = null;
     $scope.mainMenuVisible = false;
     $scope.selectExtras = function (extras) {

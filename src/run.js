@@ -1,3 +1,3 @@
-run.$inject = ['$rootScope','$state'];
-export default function run($rootScope, $state) {
+run.$inject = ['$rootScope'];
+export default function run($rootScope) {
 }

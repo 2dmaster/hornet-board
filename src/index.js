@@ -7,10 +7,9 @@ import main from './modules/main';
 import iconsModule from './services/icons';
 
 var hornetBoard = angular.module('hornetBoard', [
-    'ui.router',
+    'ngRoute',
     'LocalStorageModule',
     'rzModule',
-    'pr.longpress',
     bluetoothModule,
     httpIndicator,
     iconsModule,
