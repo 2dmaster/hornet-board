@@ -121,16 +121,16 @@ export default function mainCtrl($scope, $state, $bluetooth, $loading, $icons){
     $scope.LIGHT_BOTH = 11;
 
 
-       $bluetooth.isEnabled()
-           .then($bluetooth.getBoundedDevices, function (err) {
-               $bluetooth.enable()
-                   .then($bluetooth.getBoundedDevices)
-                   .then(function (devices) {
-                       return $scope.devices = devices;
-                   })
-           }).then(function (devices) {
-               return $scope.devices = devices;
-           });
+       // $bluetooth.isEnabled()
+       //     .then($bluetooth.getBoundedDevices, function (err) {
+       //         $bluetooth.enable()
+       //             .then($bluetooth.getBoundedDevices)
+       //             .then(function (devices) {
+       //                 return $scope.devices = devices;
+       //             })
+       //     }).then(function (devices) {
+       //         return $scope.devices = devices;
+       //     });
 
        $scope.openPort = function() {
            $loading.setStatus(true);

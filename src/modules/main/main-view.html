@@ -1,81 +1,76 @@
-<!--<h1>Bluetooth test {{test}}</h1>-->
-<!--<ul class="device-list">-->
-<!--<li class="device"-->
-<!--ng-repeat="device in devices"-->
-<!--ng-class="{'active': device.active}">-->
-<!--<div ng-click="manageConnection(device.address, $index)">-->
-<!--<p>{{device.name}}</p>-->
-<!--<p>{{device.address}}</p>-->
-<!--</div>-->
-<!--<div class="device-display" ng-show="device.active">-->
-<!--<div>-->
-<!--<p>Both</p>-->
-<!--<rzslider rz-slider-model="bothSlider.value"-->
-<!--rz-slider-options="bothSlider.options"></rzslider>-->
-<!--</div>-->
-<!--<div>-->
-<!--<p>Left</p>-->
-<!--<rzslider rz-slider-model="leftSlider.value"-->
-<!--rz-slider-options="leftSlider.options"></rzslider>-->
-<!--</div>-->
-<!--<div>-->
-<!--<p>Right</p>-->
-<!--<rzslider rz-slider-model="rightSlider.value"-->
-<!--rz-slider-options="rightSlider.options"></rzslider>-->
-<!--</div>-->
-<!--<div>{{bluetoothData}}</div>-->
-<!--</div>-->
-<!--</li>-->
-<!--</ul>-->
 
-<div class="content" ng-class="{extras: currentExtras.visible, menu: mainMenuVisible}">
-    <ul class="controls">
-        <li class="control" ng-repeat="control in controls" ng-class="{'active':control.active}">
-            <div class="btn-control" ng-click="control.action(control)" on-long-press="selectExtras(control.extras)">
-                <i class="btn-icon" ng-bind-html="control.icon"></i>
-                <div class="btn-text">{{::control.name}}</div>
+<!--<div class="content" ng-class="{extras: currentExtras.visible, menu: mainMenuVisible}">-->
+    <!--<ul class="controls">-->
+        <!--<li class="control" ng-repeat="control in controls" ng-class="{'active':control.active}">-->
+            <!--<div class="btn-control" ng-click="control.action(control)" on-long-press="selectExtras(control.extras)">-->
+                <!--<i class="btn-icon" ng-bind-html="control.icon"></i>-->
+                <!--<div class="btn-text">{{::control.name}}</div>-->
+            <!--</div>-->
+        <!--</li>-->
+    <!--</ul>-->
+    <!--<ul class="control-extras">-->
+        <!--<li class="extra" ng-repeat="control in currentExtras.controls">-->
+            <!--<div ng-if="control.name.toLowerCase() != 'strobe'">-->
+                <!--<p class="control-text">{{::control.name}}</p>-->
+                <!--<rzslider rz-slider-model="control.config.value"-->
+                          <!--rz-slider-options="control.config.options"></rzslider>-->
+            <!--</div>-->
+            <!--<div ng-if="control.name.toLowerCase() == 'strobe'">-->
+                <!--<p class="control-text">Strobe</p>-->
+                <!--<input type="checkbox" ng-true-value="'11;999;'" ng-false-value="'11;255;'" ng-model="control.command" ng-change="send(control.command)">-->
+            <!--</div>-->
+        <!--</li>-->
+    <!--</ul>-->
+    <!--<ul class="main-menu">-->
+        <!--<li class="menu-item devices" ng-repeat="device in devices" ng-class="{active:device.active}">-->
+            <!--<div ng-click="manageConnection(device.address, $index)">-->
+                <!--<p>{{device.name}}</p>-->
+                <!--<p>{{device.address}}</p>-->
+            <!--</div>-->
+        <!--</li>-->
+    <!--</ul>-->
+    <!--<ul class="status-bar">-->
+        <!--<li class="status btn-main-menu" ng-click="toggleMainMenu()">-->
+            <!--<div class="stripe"></div>-->
+            <!--<div class="stripe"></div>-->
+            <!--<div class="stripe"></div>-->
+        <!--</li>-->
+        <!--<li class="status">-->
+            <!--20L-->
+        <!--</li>-->
+        <!--<li class="status">-->
+            <!--1.2A-->
+        <!--</li>-->
+        <!--<li class="status">-->
+            <!--1.8P-->
+        <!--</li>-->
+    <!--</ul>-->
+<!--</div>-->
+
+<ul class="main-menu" ng-class="{'active' : mainMenuVisible}">
+    <li class="main-menu-content"></li>
+    <li class="status-bar">
+        <div class="status" ng-click="toggleMainMenu()">
+            <div class="btn-main-menu">
+                <div class="stripe"></div>
+                <div class="stripe"></div>
+                <div class="stripe"></div>
             </div>
-        </li>
-    </ul>
-    <ul class="control-extras">
-        <li class="extra" ng-repeat="control in currentExtras.controls">
-            <div ng-if="control.name.toLowerCase() != 'strobe'">
-                <p class="control-text">{{::control.name}}</p>
-                <rzslider rz-slider-model="control.config.value"
-                          rz-slider-options="control.config.options"></rzslider>
-            </div>
-            <div ng-if="control.name.toLowerCase() == 'strobe'">
-                <p class="control-text">Strobe</p>
-                <input type="checkbox" ng-true-value="'11;999;'" ng-false-value="'11;255;'" ng-model="control.command" ng-change="send(control.command)">
-            </div>
-        </li>
-    </ul>
-    <ul class="main-menu">
-        <li class="menu-item devices" ng-repeat="device in devices" ng-class="{active:device.active}">
-            <div ng-click="manageConnection(device.address, $index)">
-                <p>{{device.name}}</p>
-                <p>{{device.address}}</p>
-            </div>
-        </li>
-    </ul>
-    <ul class="status-bar">
-        <li class="status btn-main-menu" ng-click="toggleMainMenu()">
-            <div class="stripe"></div>
-            <div class="stripe"></div>
-            <div class="stripe"></div>
-        </li>
-        <li class="status">
+        </div>
+        <div class="status">
             20L
-        </li>
-        <li class="status">
+        </div>
+        <div class="status">
             1.2A
-        </li>
-        <li class="status">
+        </div>
+        <div class="status">
             1.8P
-        </li>
-    </ul>
-</div>
+        </div>
+    </li>
+</ul>
+<div class="control-panel">
 
+</div>
 
 
 <http-indicator></http-indicator>

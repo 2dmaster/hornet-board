@@ -4,11 +4,23 @@ html, body, .router{
   margin: 0;
 }
 *{
-  outline: none;
   box-sizing: border-box;
+  -webkit-touch-callout:none;                /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust:none;             /* prevent webkit from resizing text to fit */
+  -webkit-tap-highlight-color:transparent; /* prevent tap highlight color / shadow */
+  -webkit-user-select:none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
 }
+
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .root{
   height: inherit;
+  display: flex;
+  flex: 100%;
 }
 .rzslider{
   margin: 15px 0 15px;
