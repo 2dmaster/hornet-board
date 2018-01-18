@@ -15,95 +15,108 @@ export default function mainCtrl($scope, $bluetooth, $loading, $icons){
     };
     $scope.controls = [
         {
-            name:'Lights',
+            name:'trunk',
+            title:'Trunk lights',
             active:false,
-            icon:$icons.LIGHTS,
             action:function (control) {
-                if (control.active){
-                    $scope.send($scope.LIGHT_BOTH+';'+0+';');
-                } else {
-                    $scope.send($scope.LIGHT_BOTH+';'+255+';');
-                }
+                // if (control.active){
+                //     $scope.send($scope.commands[control.name].command);
+                // } else {
+                //     $scope.send($scope.commands[control.name].command);
+                // }
                 control.active = !control.active;
-            },
-            extras:{
-                visible:false,
-                controls:[
-                    {
-                        name:'both',
-                        config:{
-                            value: 0,
-                            options: {
-                                floor: 0,
-                                ceil: 255,
-                                step: 1,
-                                id: 'both',
-                                onChange: function(id, newVal) {
-                                    $scope.send($scope.LIGHT_BOTH+';'+newVal+';');
-                                },
-                            }
-                        }
-                    },
-                    {
-                        name:'left',
-                        config:{
-                            value: 0,
-                            options: {
-                                floor: 0,
-                                ceil: 255,
-                                step: 1,
-                                id: 'light-l',
-                                onChange: function(id, newVal) {
-                                    $scope.send($scope.LIGHT_L+';'+newVal+';');
-                                },
-                            }
-                        }
-                    },
-                    {
-                        name:'right',
-                        config:{
-                            value: 0,
-                            options: {
-                                floor: 0,
-                                ceil: 255,
-                                step: 1,
-                                id: 'light-l',
-                                onChange: function(id, newVal) {
-                                    $scope.send($scope.LIGHT_R+';'+newVal+';');
-                                },
-                            }
-                        }
-                    },
-                    {
-                        name:'strobe',
-                        command:''
-                    }
-                ]
             }
         },
         {
-            name:'AMP',
+            name:'lights',
+            title:'Head lights',
             active:false,
-            icon:$icons.AMP,
             action:function (control) {
-                if (control.active){
-                    $scope.send($scope.AMP+';'+$scope.OFF+';');
-                } else {
-                    $scope.send($scope.AMP+';'+$scope.ON+';');
-                }
+                // if (control.active){
+                //     $scope.send($scope.LIGHT_BOTH+';'+0+';');
+                // } else {
+                //     $scope.send($scope.LIGHT_BOTH+';'+255+';');
+                // }
                 control.active = !control.active;
             },
+            // extras:{
+            //     visible:false,
+            //     controls:[
+            //         {
+            //             name:'both',
+            //             config:{
+            //                 value: 0,
+            //                 options: {
+            //                     floor: 0,
+            //                     ceil: 255,
+            //                     step: 1,
+            //                     id: 'both',
+            //                     onChange: function(id, newVal) {
+            //                         $scope.send($scope.LIGHT_BOTH+';'+newVal+';');
+            //                     },
+            //                 }
+            //             }
+            //         },
+            //         {
+            //             name:'left',
+            //             config:{
+            //                 value: 0,
+            //                 options: {
+            //                     floor: 0,
+            //                     ceil: 255,
+            //                     step: 1,
+            //                     id: 'light-l',
+            //                     onChange: function(id, newVal) {
+            //                         $scope.send($scope.LIGHT_L+';'+newVal+';');
+            //                     },
+            //                 }
+            //             }
+            //         },
+            //         {
+            //             name:'right',
+            //             config:{
+            //                 value: 0,
+            //                 options: {
+            //                     floor: 0,
+            //                     ceil: 255,
+            //                     step: 1,
+            //                     id: 'light-l',
+            //                     onChange: function(id, newVal) {
+            //                         $scope.send($scope.LIGHT_R+';'+newVal+';');
+            //                     },
+            //                 }
+            //             }
+            //         },
+            //         {
+            //             name:'strobe',
+            //             command:''
+            //         }
+            //     ]
+            // }
         },
         {
-            name:'ILU',
+            name:'audio',
+            title:'Audio system',
             active:false,
-            icon:$icons.ILU,
             action:function (control) {
-                if (control.active){
-                    $scope.send($scope.ILLUMINATION+';'+$scope.OFF+';');
-                } else {
-                    $scope.send($scope.ILLUMINATION+';'+$scope.ON+';');
-                }
+                // if (control.active){
+                //     $scope.send($scope.AMP+';'+$scope.OFF+';');
+                // } else {
+                //     $scope.send($scope.AMP+';'+$scope.ON+';');
+                // }
+                control.active = !control.active;
+            }
+        },
+        {
+            name:'ambient',
+            title:'Ambient light',
+            active:false,
+            action:function (control) {
+                // if (control.active){
+                //     $scope.send($scope.ILLUMINATION+';'+$scope.OFF+';');
+                // } else {
+                //     $scope.send($scope.ILLUMINATION+';'+$scope.ON+';');
+                // }
                 control.active = !control.active;
             },
         }

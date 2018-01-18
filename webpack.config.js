@@ -28,16 +28,16 @@ module.exports = function(env) {
         },
         module: {
             rules: [
-                // {
-                //     test: /\.js$/,
-                //     exclude: /(bower_components)/,
-                //     use: {
-                //         loader: 'babel-loader',
-                //         options: {
-                //             presets: ['babel-preset-env']
-                //         }
-                //     }
-                // },
+                {
+                    test: /\.js$/,
+                    exclude: /(bower_components)/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['babel-preset-env']
+                        }
+                    }
+                },
                 {
                     test: /\.html$/,
                     use:[

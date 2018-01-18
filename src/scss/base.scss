@@ -9,6 +9,7 @@ html, body, .router{
   -webkit-text-size-adjust:none;             /* prevent webkit from resizing text to fit */
   -webkit-tap-highlight-color:transparent; /* prevent tap highlight color / shadow */
   -webkit-user-select:none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+  font-family: Monospaced, sans-serif;
 }
 
 ul{

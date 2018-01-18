@@ -1,24 +1,98 @@
-$radius: 100% 34px;
-$border: 3px solid #e7c439;
+$baseYellow: #e7c439;
+$radius: 100% 20px;
+$border: 3px solid $baseYellow;
+$statusBarHeight: 17%;
+$controlAreaHeight: 83%;
+$transitionSpeed: .3s;
 .control-panel{
   display: flex;
+  flex-wrap: wrap;
   flex:100%;
+  height: 100%;
+  padding-top: 12%;
   background: url('./img/bg.jpg') left top no-repeat;
-  .glow{
+  position: relative;
+  .effects{
+    position: absolute;
+    left:0;
+    bottom:0;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+    .glow{
+      position: absolute;
+      top: 256px;
+      left: 66px;
+      opacity: 0;
+      transition: opacity $transitionSpeed ease;
+      &.active{
+        opacity: 1;
+      }
+    }
+  }
+
+  .control{
     display: flex;
-    flex:100%;
-    background: url('./img/glow.png') left top no-repeat;
+    flex:50%;
+    height: 50%;
+    z-index: 1;
+    .state-indicator{
+      width: 5px;
+      height: 50%;
+      background-color: $baseYellow;
+      opacity: .1;
+      border-radius: 3px;
+      margin: 5px;
+      transition: opacity $transitionSpeed ease;
+    }
+    &.lights,
+    &.ambient{
+      flex-direction: row-reverse;
+    }
+    &.trunk,
+    &.audio{
+      justify-content: flex-start;
+    }
+    &.trunk,
+    &.lights{
+      align-items: flex-start;
+    }
+    &.audio,
+    &.ambient{
+      align-items: flex-end;
+    }
+    .control-head{
+      text-transform: uppercase;
+      margin: 5px 0;
+      font-weight: 100;
+      font-size: 14px;
+      color: white;
+      opacity: .5;
+      transition: opacity $transitionSpeed ease;
+    }
+    &.active{
+      .control-head{
+        opacity: 1;
+      }
+      .state-indicator{
+        opacity: 1;
+      }
+    }
   }
 }
 .status-bar{
+  z-index: 3;
   display: flex;
   justify-content: space-between;
-  height: 15%;
-  background-color: #5d5738;
+  height: $statusBarHeight;
+  background-color: #1c1c1c;
+  padding: 5px;
   .status{
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px;
+    color: white;
     &:after{
       content: '';
       padding-top: 100%;
@@ -26,7 +100,7 @@ $border: 3px solid #e7c439;
     }
   }
   .main-menu-toggle{
-    padding: 23px;
+    padding: 13px 10px;
   }
   .btn-main-menu{
     display: flex;
@@ -60,18 +134,18 @@ $border: 3px solid #e7c439;
   flex-direction: column;
   flex:100%;
   position: absolute;
-  transform: translateY(-85%);
+  transform: translateY(-$controlAreaHeight);
   top:0;
   width: 100%;
   height: 100%;
-  transition: transform .3s ease;
+  transition: transform $transitionSpeed ease;
   border-bottom-right-radius: $radius;
   border-bottom-left-radius: $radius;
   border-bottom: $border;
   overflow: hidden;
   .main-menu-content{
     display: flex;
-    height: 85%;
+    height: $controlAreaHeight;
     overflow-y: auto;
   }
   &.active{
