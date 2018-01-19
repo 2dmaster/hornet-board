@@ -48,7 +48,13 @@
 <!--</div>-->
 
 <ul class="main-menu" ng-class="{'active' : mainMenuVisible}">
-    <li class="main-menu-content"></li>
+    <li class="main-menu-content">
+        <div class="menu-item lights">
+            <label>{{lightsIntencity}}</label>
+            <input type="range" ng-model="lightsIntencity" min="0" max="255">
+        </div>
+        <div class="menu-item device"></div>
+    </li>
     <li class="status-bar">
         <div class="status main-menu-toggle" ng-click="toggleMainMenu()">
             <div class="btn-main-menu">

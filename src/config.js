@@ -1,7 +1,4 @@
-config.$inject = ['$routeProvider','localStorageServiceProvider'];
-export default function config($routeProvider, localStorageServiceProvider) {
+config.$inject = ['$routeProvider'];
+export default function config($routeProvider) {
     $routeProvider.otherwise('/');
-    localStorageServiceProvider
-        .setPrefix('hornet-board')
-        .setStorageType('sessionStorage');
 }

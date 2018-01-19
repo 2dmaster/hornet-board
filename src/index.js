@@ -8,8 +8,6 @@ import iconsModule from './services/icons';
 
 var hornetBoard = angular.module('hornetBoard', [
     'ngRoute',
-    'LocalStorageModule',
-    'rzModule',
     bluetoothModule,
     httpIndicator,
     iconsModule,

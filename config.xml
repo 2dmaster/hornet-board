@@ -18,8 +18,7 @@
     <preference name="Fullscreen" value="true" />
     <preference name="Orientation" value="landscape" />
     <platform name="android">
-        <preference name="android-minSdkVersion" value="15" />
-        <preference name="android-targetSdkVersion" value="25" />
+        <preference name="android-minSdkVersion" value="14" />
         <icon platform="android" src="res/icon.png" />
         <allow-intent href="market:*" />
     </platform>

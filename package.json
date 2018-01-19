@@ -5,7 +5,7 @@
   "scripts": {
     "webpack-build": "webpack -p --env.NODE_ENV=production --config webpack.config.js",
     "webpack-dev": "webpack --env.NODE_ENV=development --config webpack.config.js --watch",
-    "cordova-android": "npm run webpack-build && cordova build android"
+    "cordova-android": "npm run webpack-build && cordova build android --release"
   },
   "author": "2dmaster",
   "license": "MIT",
@@ -29,9 +29,7 @@
   "dependencies": {
     "angular": "^1.6.7",
     "angular-deferred-bootstrap": "^0.1.9",
-    "angular-local-storage": "^0.7.1",
-    "angular-route": "^1.6.8",
-    "angularjs-slider": "^6.4.3"
+    "angular-route": "^1.6.8"
   },
   "cordova": {
     "platforms": [
