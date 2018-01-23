@@ -51,7 +51,7 @@
     <li class="main-menu-content">
         <div class="menu-item lights">
             <label>{{lightsIntencity}}</label>
-            <input type="range" ng-model="lightsIntencity" min="0" max="255">
+            <input type="range" ng-model="LIGHTS_INTENSITY" min="0" max="255">
         </div>
         <div class="menu-item device"></div>
     </li>
@@ -76,10 +76,10 @@
 </ul>
 <div class="control-panel">
     <div class="effects">
-        <img class="glow" ng-class="{active:controls[3].active}" src="img/glow.png">
+        <img class="glow" ng-class="{active:controls['ambient'].active}" src="img/glow.png">
     </div>
-    <div class="control" ng-repeat="control in controls"
-         ng-class="[control.name, {active:control.active}]"
+    <div class="control" ng-repeat="(name, control) in controls"
+         ng-class="[name, {active:control.active}]"
          ng-click="control.action(control)">
         <div class="state-indicator"></div>
         <h1 class="control-head">{{::control.title}}</h1>
