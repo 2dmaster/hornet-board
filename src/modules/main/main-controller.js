@@ -15,6 +15,7 @@ export default function mainCtrl($scope, $bluetooth, $loading, $icons){
     // device config
     $scope.AMP = 4;
     $scope.ILLUMINATION = 5;
+    $scope.TRUNK = 7;
     $scope.LIGHT_L = 6;
     $scope.LIGHT_R = 9;
     $scope.LIGHT_BOTH = 11;
@@ -28,12 +29,13 @@ export default function mainCtrl($scope, $bluetooth, $loading, $icons){
             command:$scope.ON,
             active:false,
             action:function (control) {
-                // if (control.active){
-                //     control.command = $scope.OFF;
-                // } else {
-                //     control.command = $scope.ON;
-                // }
+                if (control.active){
+                    control.command = $scope.OFF;
+                } else {
+                    control.command = $scope.ON;
+                }
                 //     $scope.send(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
+                console.log(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
                 control.active = !control.active;
             }
         },
@@ -44,12 +46,13 @@ export default function mainCtrl($scope, $bluetooth, $loading, $icons){
             command:$scope.LIGHTS_INTENSITY,
             active:false,
             action:function (control) {
-                // if (control.active){
-                //     control.command = $scope.LIGHTS_OFF;
-                // } else {
-                //     control.command = $scope.LIGHTS_INTENSITY;
-                // }
+                if (control.active){
+                    control.command = $scope.LIGHTS_OFF;
+                } else {
+                    control.command = $scope.LIGHTS_INTENSITY;
+                }
                 //     $scope.send(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
+                console.log(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
                 control.active = !control.active;
             }
         },
@@ -60,12 +63,13 @@ export default function mainCtrl($scope, $bluetooth, $loading, $icons){
             command:$scope.ON,
             active:false,
             action:function (control) {
-                // if (control.active){
-                //     control.command = $scope.OFF;
-                // } else {
-                //     control.command = $scope.ON;
-                // }
+                if (control.active){
+                    control.command = $scope.OFF;
+                } else {
+                    control.command = $scope.ON;
+                }
                 //     $scope.send(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
+                console.log(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
                 control.active = !control.active;
             }
         },
@@ -76,12 +80,13 @@ export default function mainCtrl($scope, $bluetooth, $loading, $icons){
             command:$scope.ON,
             active:false,
             action:function (control) {
-                // if (control.active){
-                //     control.command = $scope.OFF;
-                // } else {
-                //     control.command = $scope.ON;
-                // }
+                if (control.active){
+                    control.command = $scope.OFF;
+                } else {
+                    control.command = $scope.ON;
+                }
                 //     $scope.send(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
+                console.log(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
                 control.active = !control.active;
             },
         }
