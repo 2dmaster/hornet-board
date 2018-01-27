@@ -6,26 +6,32 @@
 // end common constants
 
 // pin config
-#define BT_SPEED 9600
-#define BT_RX 3
-#define BT_TX 2
+#define BT_SPEED 38400
+#define BT_RX 2
+#define BT_TX 3
 #define AMP 4
-#define ILLUMINATION 5
+#define ILLUMINATION 8
 #define LIGHT_L 6
+#define TRUNK 5
 #define LIGHT_R 9
 #define LIGHT_BOTH 11
+#define VOLTMETER 7
 //end pin config 
 
 bool DO_STROBE = false;
 SoftwareSerial BT(BT_RX,BT_TX);
 
+unsigned long previousMillis = 0;
+
 void setup()
 {
-  // For ledBlink(), set LEDBLINK_PIN to output.
   pinMode(AMP, OUTPUT);
   pinMode(ILLUMINATION, OUTPUT);
+  pinMode(TRUNK, OUTPUT);
   pinMode(LIGHT_L, OUTPUT);
   pinMode(LIGHT_R, OUTPUT);
+  pinMode(VOLTMETER, INPUT);
+  
 //  Serial.setTimeout(100);
 //  Serial.begin(BT_SPEED);
   BT.setTimeout(100);
@@ -89,14 +95,28 @@ void processAnalogDevice(int device){
   }
 }
 
+void mesureVolts(int interval){
+  float vout = 0.0;
+  float divider = 0.09223; //100000 Ohm and 10160 Ohm resistors constant
+  unsigned long currentMillis = millis();
+if (currentMillis - previousMillis >= interval) { 
+   previousMillis = currentMillis;
+   vout = ((analogRead(VOLTMETER) * 5.0) / 1024.0) / divider; // see text
+   BT.print(vout);
+   BT.print('V');
+   BT.print('\n');
+  }
+}
+
 void loop()
 { 
   int device;  
-  if (BT.available()){      
-    device = BT.parseInt();       
+  if (BT.available()){       
+    device = BT.parseInt();     
     if (device != 0){
       switch (device) {
         case AMP:
+        case TRUNK:
         case ILLUMINATION:
           processDigitalDevice(device);
           break;  
@@ -108,5 +128,6 @@ void loop()
       } 
     }    
   }
-  strobe(DO_STROBE);  
+  strobe(DO_STROBE);
+  mesureVolts(1000);
 }

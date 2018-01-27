@@ -14,13 +14,16 @@ export default function mainCtrl($scope, $bluetooth, $loading, $icons){
 
     // device config
     $scope.AMP = 4;
-    $scope.ILLUMINATION = 5;
-    $scope.TRUNK = 7;
+    $scope.ILLUMINATION = 8;
+    $scope.TRUNK = 5;
     $scope.LIGHT_L = 6;
     $scope.LIGHT_R = 9;
     $scope.LIGHT_BOTH = 11;
     $scope.DELIMITER = ';';
-
+    $scope.strobe = false;
+    $scope.dimmer = function (val) {
+        $scope.send($scope.LIGHT_BOTH+$scope.DELIMITER+val+$scope.DELIMITER);
+    };
     $scope.controls = {
         trunk:{
             name:'trunk',
@@ -34,8 +37,8 @@ export default function mainCtrl($scope, $bluetooth, $loading, $icons){
                 } else {
                     control.command = $scope.ON;
                 }
-                //     $scope.send(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
-                console.log(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
+                $scope.send(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
+                // console.log(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
                 control.active = !control.active;
             }
         },
@@ -49,10 +52,14 @@ export default function mainCtrl($scope, $bluetooth, $loading, $icons){
                 if (control.active){
                     control.command = $scope.LIGHTS_OFF;
                 } else {
-                    control.command = $scope.LIGHTS_INTENSITY;
+                    if ($scope.strobe){
+                        control.command = 999;
+                    } else {
+                        control.command = $scope.LIGHTS_INTENSITY;
+                    }
                 }
-                //     $scope.send(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
-                console.log(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
+                $scope.send(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
+                // console.log(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
                 control.active = !control.active;
             }
         },
@@ -68,8 +75,8 @@ export default function mainCtrl($scope, $bluetooth, $loading, $icons){
                 } else {
                     control.command = $scope.ON;
                 }
-                //     $scope.send(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
-                console.log(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
+                $scope.send(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
+                // console.log(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
                 control.active = !control.active;
             }
         },
@@ -85,22 +92,22 @@ export default function mainCtrl($scope, $bluetooth, $loading, $icons){
                 } else {
                     control.command = $scope.ON;
                 }
-                //     $scope.send(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
-                console.log(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
+                $scope.send(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
+                // console.log(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
                 control.active = !control.active;
             },
         }
     };
-       // $bluetooth.isEnabled()
-       //     .then($bluetooth.getBoundedDevices, function (err) {
-       //         $bluetooth.enable()
-       //             .then($bluetooth.getBoundedDevices)
-       //             .then(function (devices) {
-       //                 return $scope.devices = devices;
-       //             })
-       //     }).then(function (devices) {
-       //         return $scope.devices = devices;
-       //     });
+       $bluetooth.isEnabled()
+           .then($bluetooth.getBoundedDevices, function (err) {
+               $bluetooth.enable()
+                   .then($bluetooth.getBoundedDevices)
+                   .then(function (devices) {
+                       return $scope.devices = devices;
+                   })
+           }).then(function (devices) {
+               return $scope.devices = devices;
+           });
 
        $scope.openPort = function() {
            $loading.setStatus(true);

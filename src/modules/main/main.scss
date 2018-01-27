@@ -144,9 +144,14 @@ $transitionSpeed: .3s;
   border-bottom: $border;
   overflow: hidden;
   .main-menu-content{
+    padding: 15px;
     display: flex;
+    flex-direction: column;
     height: $controlAreaHeight;
     overflow-y: auto;
+    .menu-item{
+      margin: 10px 0;
+    }
   }
   &.active{
     transform: translateY(0);
@@ -176,3 +181,9 @@ $transitionSpeed: .3s;
   }
 }
 
+.device{
+  color:white;
+  &.active{
+    background-color: green;
+  }
+}

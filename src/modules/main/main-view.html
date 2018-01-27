@@ -50,10 +50,26 @@
 <ul class="main-menu" ng-class="{'active' : mainMenuVisible}">
     <li class="main-menu-content">
         <div class="menu-item lights">
-            <label>{{lightsIntencity}}</label>
-            <input class="range-control" type="range" ng-model="LIGHTS_INTENSITY" min="0" max="255">
+            <input class="range-control"
+                   type="range"
+                   ng-change="dimmer(LIGHTS_INTENSITY)"
+                   ng-model="LIGHTS_INTENSITY" min="0" max="255">
         </div>
-        <div class="menu-item device"></div>
+        <div class="menu-item lights">
+            <label>
+                <input type="checkbox"
+                       ng-model="strobe">
+                Strobe
+            </label>
+        </div>
+        <ul class="menu-item devices">
+            <li class="device" ng-repeat="device in devices" ng-class="{active:device.active}">
+                <div ng-click="manageConnection(device.address, $index)">
+                    <p>{{device.name}}</p>
+                    <p>{{device.address}}</p>
+                </div>
+            </li>
+        </ul>
     </li>
     <li class="status-bar">
         <div class="status main-menu-toggle" ng-click="toggleMainMenu()">
@@ -64,13 +80,7 @@
             </div>
         </div>
         <div class="status">
-            20L
-        </div>
-        <div class="status">
-            1.2A
-        </div>
-        <div class="status">
-            1.8P
+            {{bluetoothData}}
         </div>
     </li>
 </ul>
