@@ -6,6 +6,9 @@
         <title>Hornet</title>
         <link rel="stylesheet" type="text/css" href="bundle.min.css">
         <style>
+            body{
+                background-color: #1c1c1c;
+            }
             .loading {
                 position: fixed;
                 left: 0;
@@ -16,6 +19,7 @@
                 align-items: center;
                 justify-content: center;
                 z-index: 1;
+                background-color: rgba(0,0,0, .6);
             }
             .loading.active{
                 display: flex;
@@ -26,7 +30,7 @@
             .loading .circle-loader {
                 background-color: transparent;
                 fill: transparent;
-                stroke: #d82d3f;
+                stroke: #e7c439;
                 stroke-width: 3;
                 animation: dash 1.5s ease infinite, rotate 1.5s linear infinite;
             }
