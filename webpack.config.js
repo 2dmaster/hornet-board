@@ -72,17 +72,17 @@ module.exports = function(env) {
                             {
                                 loader:'sass-loader'
                             },
-                            {
-                                loader:'postcss-loader',
-                                options: {
-                                    ident: 'postcss',
-                                    plugins: function () {
-                                        return [
-                                            autoprefixer
-                                        ];
-                                    }
-                                }
-                            }
+                            // {
+                            //     loader:'postcss-loader',
+                            //     options: {
+                            //         ident: 'postcss',
+                            //         plugins: function () {
+                            //             return [
+                            //                 autoprefixer
+                            //             ];
+                            //         }
+                            //     }
+                            // }
                         ]
                     })
                 }

@@ -86,12 +86,11 @@ $transitionSpeed: .3s;
   justify-content: space-between;
   height: $statusBarHeight;
   background-color: #1c1c1c;
-  padding: 5px;
   .status{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 10px 18px;
     color: white;
     &:after{
       content: '';
@@ -100,7 +99,7 @@ $transitionSpeed: .3s;
     }
   }
   .main-menu-toggle{
-    padding: 13px 10px;
+    padding: 18px;
   }
   .btn-main-menu{
     display: flex;

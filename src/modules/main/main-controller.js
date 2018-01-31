@@ -1,113 +1,117 @@
-mainCtrl.$inject = ['$scope', '$bluetooth', 'indicatorStatusService', '$icons'];
-export default function mainCtrl($scope, $bluetooth, $loading, $icons){
+mainCtrl.$inject = ['$scope', '$bluetooth', '$loading', '$commands', '$controls', '$utils'];
+export default function mainCtrl($scope, $bluetooth, $loading, $commands, $controls, $utils){
     $scope.mainMenuVisible = false;
+    $scope.LIGHTS_INTENSITY = 255;
+    $scope.strobe = false;
+
+
     $scope.toggleMainMenu = function () {
         $scope.mainMenuVisible = !$scope.mainMenuVisible
     };
 
-    $scope.ON = 1;
-    $scope.OFF = 20;
-    $scope.LIGHTS_OFF = 0;
-    $scope.LIGHTS_INTENSITY = 255;
-    $scope.STROBE = 999;
-    // end common constants
-
-    // device config
-    $scope.AMP = 4;
-    $scope.ILLUMINATION = 8;
-    $scope.TRUNK = 5;
-    $scope.LIGHT_L = 6;
-    $scope.LIGHT_R = 9;
-    $scope.LIGHT_BOTH = 11;
-    $scope.DELIMITER = ';';
-    $scope.strobe = false;
-    $scope.dimmer = function (val) {
-        $scope.send($scope.LIGHT_BOTH+$scope.DELIMITER+val+$scope.DELIMITER);
+    $scope.getDeviceState = function () {
+        return JSON.parse(localStorage.getItem('deviceState')) || null
     };
-    $scope.controls = {
-        trunk:{
-            name:'trunk',
-            title:'Trunk lights',
-            device:$scope.TRUNK,
-            command:$scope.ON,
-            active:false,
-            action:function (control) {
-                if (control.active){
-                    control.command = $scope.OFF;
-                } else {
-                    control.command = $scope.ON;
-                }
-                $scope.send(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
-                // console.log(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
-                control.active = !control.active;
+
+    $scope.setDeviceState = function () {
+        localStorage.setItem('deviceState', JSON.stringify($scope.deviceState));
+    };
+
+    $scope.assignActions = function (controls) {
+        for (var key in controls) {
+            if (controls.hasOwnProperty(key)){
+                controls[key].action = $scope.controlAction
             }
-        },
-        lights:{
-            name:'lights',
-            title:'Head lights',
-            device:$scope.LIGHT_BOTH,
-            command:$scope.LIGHTS_INTENSITY,
-            active:false,
-            action:function (control) {
-                if (control.active){
-                    control.command = $scope.LIGHTS_OFF;
-                } else {
-                    if ($scope.strobe){
-                        control.command = 999;
-                    } else {
-                        control.command = $scope.LIGHTS_INTENSITY;
-                    }
-                }
-                $scope.send(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
-                // console.log(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
-                control.active = !control.active;
-            }
-        },
-        audio:{
-            name:'audio',
-            title:'Audio system',
-            device:$scope.AMP,
-            command:$scope.ON,
-            active:false,
-            action:function (control) {
-                if (control.active){
-                    control.command = $scope.OFF;
-                } else {
-                    control.command = $scope.ON;
-                }
-                $scope.send(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
-                // console.log(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
-                control.active = !control.active;
-            }
-        },
-        ambient:{
-            name:'ambient',
-            title:'Ambient light',
-            device:$scope.ILLUMINATION,
-            command:$scope.ON,
-            active:false,
-            action:function (control) {
-                if (control.active){
-                    control.command = $scope.OFF;
-                } else {
-                    control.command = $scope.ON;
-                }
-                $scope.send(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
-                // console.log(control.device+$scope.DELIMITER+control.command+$scope.DELIMITER);
-                control.active = !control.active;
-            },
         }
     };
-       $bluetooth.isEnabled()
-           .then($bluetooth.getBoundedDevices, function (err) {
-               $bluetooth.enable()
-                   .then($bluetooth.getBoundedDevices)
-                   .then(function (devices) {
-                       return $scope.devices = devices;
-                   })
-           }).then(function (devices) {
-               return $scope.devices = devices;
-           });
+
+    $scope.initLights = function (lights) {
+        switch (lights.command){
+            case 0 :{
+                $scope.LIGHTS_INTENSITY = 255;
+                break;
+            }
+            case $commands.STROBE: {
+                $scope.strobe = lights.command;
+                break;
+            }
+            default: {
+                $scope.LIGHTS_INTENSITY = lights.command;
+                break;
+            }
+        }
+    };
+
+    $scope.initDeviceState = function () {
+        $scope.deviceState = $scope.getDeviceState() ||
+            {
+                controls : $controls,
+                bluetooth:{
+                    address : null,
+                    $index: null
+                }
+            };
+        $scope.initLights($scope.deviceState.controls.lights);
+        $scope.assignActions($scope.deviceState.controls);
+    };
+
+    $scope.processControl = function (control) {
+        console.log(control.device+$utils.delimit(control.command));
+    };
+
+    $scope.dimmer = function (val) {
+        $scope.deviceState.controls['lights'].command = val;
+        $scope.processControl($scope.deviceState.controls['lights']);
+    };
+
+    $scope.doStrobe = function (command) {
+        if (command){
+            $scope.deviceState.controls['lights'].command = command;
+        } else {
+            $scope.deviceState.controls['lights'].command = $scope.LIGHTS_INTENSITY;
+        }
+        if ($scope.deviceState.controls['lights'].active){
+            $scope.processControl($scope.deviceState.controls['lights']);
+        }
+        $scope.setDeviceState();
+    };
+
+    $scope.processLights = function (control) {
+        if (control.active){
+            control.command = $commands.LIGHTS_OFF;
+        } else if ($scope.strobe) {
+            control.command = $commands.STROBE;
+        } else {
+            control.command = $scope.LIGHTS_INTENSITY;
+        }
+    };
+
+    $scope.controlAction = function (name) {
+        var control = $scope.deviceState.controls[name];
+        if (name === 'lights') {
+            $scope.processLights(control);
+        } else {
+            control.active ? control.command = $commands.OFF : control.command = $commands.ON;
+        }
+        $scope.processControl(control);
+        control.active = !control.active;
+        $scope.setDeviceState();
+    };
+
+    $scope.handleDestroy = function () {
+        $bluetooth.isConnected().then($scope.disconnectBluetooth($scope.deviceState.bluetooth.$index))
+    };
+
+       // $bluetooth.isEnabled()
+       //     .then($bluetooth.getBoundedDevices, function (err) {
+       //         $bluetooth.enable()
+       //             .then($bluetooth.getBoundedDevices)
+       //             .then(function (devices) {
+       //                 return $scope.devices = devices;
+       //             })
+       //     }).then(function (devices) {
+       //         return $scope.devices = devices;
+       //     });
 
        $scope.openPort = function() {
            $loading.setStatus(true);
@@ -140,39 +144,42 @@ export default function mainCtrl($scope, $bluetooth, $loading, $icons){
            });
        };
 
-
-       $scope.manageConnection= function(address, $index) {
-
-           // connect() will get called only if isConnected() (below)
-           // returns failure. In other words, if not connected, then connect:
-           var connect = function () {
-               // if not connected, do this:
-               // clear the screen and display an attempt to connect
-               $loading.setStatus(true);
-               $bluetooth.connect(address)
-                   .then($scope.openPort, function (err) {
-                       $loading.setStatus(false);
-                   })
-                   .then(function () {
-                       $loading.setStatus(false);
-                       $scope.devices[$index].active = !$scope.devices[$index].active;
-                   });
-           };
-
-           // disconnect() will get called only if isConnected() (below)
-           // returns success  In other words, if  connected, then disconnect:
-           var disconnect = function () {
-               $loading.setStatus(true);
-               $bluetooth.disconnect()
-                   .then($scope.closePort, function (err) {
-                       $loading.setStatus(false);
-                   })
-                   .then(function () {
-                       $loading.setStatus(false);
-                       $scope.devices[$index].active = !$scope.devices[$index].active;
-                   })
-           };
-           $bluetooth.isConnected().then(disconnect, connect);
+       $scope.connectBluetooth = function (address, $index) {
+           $loading.setStatus(true);
+           $scope.deviceState.bluetooth.address = address;
+           $scope.deviceState.bluetooth.$index = $index;
+           $scope.setDeviceState();
+           $bluetooth.connect(address)
+               .then($scope.openPort, function (err) {
+                   $loading.setStatus(false);
+               })
+               .then(function () {
+                   $loading.setStatus(false);
+                   $scope.devices[$index].active = !$scope.devices[$index].active;
+               });
        };
 
+       $scope.disconnectBluetooth = function ($index) {
+           $loading.setStatus(true);
+           $scope.deviceState.bluetooth.address = null;
+           $scope.deviceState.bluetooth.$index = null;
+           $scope.setDeviceState();
+           $bluetooth.disconnect()
+               .then($scope.closePort, function (err) {
+                   $loading.setStatus(false);
+               })
+               .then(function () {
+                   $loading.setStatus(false);
+                   $scope.devices[$index].active = !$scope.devices[$index].active;
+               })
+       };
+
+       $scope.manageConnection= function(address, $index) {
+           $bluetooth.isConnected().then(
+               $scope.connectBluetooth(address, $index),
+               $scope.disconnectBluetooth($index)
+           );
+       };
+    $scope.$on('$destroy', $scope.handleDestroy);
+    $scope.initDeviceState();
 }

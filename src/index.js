@@ -1,16 +1,16 @@
 import './scss/base.scss';
 import config from './config.js';
 import run from './run.js';
-import httpIndicator from './services/http-loading-indicator';
+import constantsModule from './services/constants';
+import httpIndicator from './services/loading-indicator';
 import bluetoothModule from './services/bluetooth'
 import main from './modules/main';
-import iconsModule from './services/icons';
 
 var hornetBoard = angular.module('hornetBoard', [
     'ngRoute',
+    constantsModule,
     bluetoothModule,
     httpIndicator,
-    iconsModule,
     main
 ]),
     appBootstrap = function () {

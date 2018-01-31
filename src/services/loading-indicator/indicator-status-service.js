@@ -1,10 +1,13 @@
+indicatorStatusService.$inject = [];
 export default function indicatorStatusService() {
-    var indicatorStatus = {};
+    var indicatorStatus = {
+        active: false
+    };
     indicatorStatus.setStatus = function (status) {
-        indicatorStatus.isActive = status;
+        indicatorStatus.active = status;
     };
     indicatorStatus.getStatus = function () {
-        return indicatorStatus.isActive;
+        return indicatorStatus.active;
     };
     return indicatorStatus;
 }

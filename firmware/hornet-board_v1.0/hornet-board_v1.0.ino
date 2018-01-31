@@ -21,7 +21,7 @@
 bool DO_STROBE = false;
 SoftwareSerial BT(BT_RX,BT_TX);
 
-unsigned long previousMillis = 0;
+unsigned long vMeasureLast = 0;
 
 void setup()
 {
@@ -95,14 +95,14 @@ void processAnalogDevice(int device){
   }
 }
 
-void mesureVolts(int interval){
-  float vout = 0.0;
-  float divider = 0.09223; //100000 Ohm and 10160 Ohm resistors constant
-  unsigned long currentMillis = millis();
-if (currentMillis - previousMillis >= interval) { 
-   previousMillis = currentMillis;
-   vout = ((analogRead(VOLTMETER) * 5.0) / 1024.0) / divider; // see text
-   BT.print(vout);
+void measureVolts(int interval){
+  float vOut = 0.0;
+  float divider = 0.090909; //100000 and 10000 Ohm resistors constant
+  unsigned long vMeasureCurrent = millis();
+if (vMeasureCurrent - vMeasureLast >= interval) {
+   vMeasureLast = vMeasureCurrent;
+   vOut = ((analogRead(VOLTMETER) * 5.0) / 1024.0) / divider; // see text
+   BT.print(vOut);
    BT.print('V');
    BT.print('\n');
   }
@@ -129,5 +129,5 @@ void loop()
     }    
   }
   strobe(DO_STROBE);
-  mesureVolts(1000);
+  measureVolts(1000);
 }

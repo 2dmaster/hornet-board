@@ -1,52 +1,3 @@
-
-<!--<div class="content" ng-class="{extras: currentExtras.visible, menu: mainMenuVisible}">-->
-    <!--<ul class="controls">-->
-        <!--<li class="control" ng-repeat="control in controls" ng-class="{'active':control.active}">-->
-            <!--<div class="btn-control" ng-click="control.action(control)" on-long-press="selectExtras(control.extras)">-->
-                <!--<i class="btn-icon" ng-bind-html="control.icon"></i>-->
-                <!--<div class="btn-text">{{::control.name}}</div>-->
-            <!--</div>-->
-        <!--</li>-->
-    <!--</ul>-->
-    <!--<ul class="control-extras">-->
-        <!--<li class="extra" ng-repeat="control in currentExtras.controls">-->
-            <!--<div ng-if="control.name.toLowerCase() != 'strobe'">-->
-                <!--<p class="control-text">{{::control.name}}</p>-->
-                <!--<rzslider rz-slider-model="control.config.value"-->
-                          <!--rz-slider-options="control.config.options"></rzslider>-->
-            <!--</div>-->
-            <!--<div ng-if="control.name.toLowerCase() == 'strobe'">-->
-                <!--<p class="control-text">Strobe</p>-->
-                <!--<input type="checkbox" ng-true-value="'11;999;'" ng-false-value="'11;255;'" ng-model="control.command" ng-change="send(control.command)">-->
-            <!--</div>-->
-        <!--</li>-->
-    <!--</ul>-->
-    <!--<ul class="main-menu">-->
-        <!--<li class="menu-item devices" ng-repeat="device in devices" ng-class="{active:device.active}">-->
-            <!--<div ng-click="manageConnection(device.address, $index)">-->
-                <!--<p>{{device.name}}</p>-->
-                <!--<p>{{device.address}}</p>-->
-            <!--</div>-->
-        <!--</li>-->
-    <!--</ul>-->
-    <!--<ul class="status-bar">-->
-        <!--<li class="status btn-main-menu" ng-click="toggleMainMenu()">-->
-            <!--<div class="stripe"></div>-->
-            <!--<div class="stripe"></div>-->
-            <!--<div class="stripe"></div>-->
-        <!--</li>-->
-        <!--<li class="status">-->
-            <!--20L-->
-        <!--</li>-->
-        <!--<li class="status">-->
-            <!--1.2A-->
-        <!--</li>-->
-        <!--<li class="status">-->
-            <!--1.8P-->
-        <!--</li>-->
-    <!--</ul>-->
-<!--</div>-->
-
 <ul class="main-menu" ng-class="{'active' : mainMenuVisible}">
     <li class="main-menu-content">
         <div class="menu-item lights">
@@ -58,7 +9,9 @@
         <div class="menu-item lights">
             <label>
                 <input type="checkbox"
-                       ng-model="strobe">
+                       ng-change="doStrobe(strobe)"
+                       ng-model="strobe"
+                       ng-true-value="999">
                 Strobe
             </label>
         </div>
@@ -80,21 +33,18 @@
             </div>
         </div>
         <div class="status">
-            {{bluetoothData}}
+            {{bluetoothData || '12.45 V'}}
         </div>
     </li>
 </ul>
 <div class="control-panel">
     <div class="effects">
-        <img class="glow" ng-class="{active:controls['ambient'].active}" src="img/glow.png">
+        <img class="glow" ng-class="{active:deviceState.controls['ambient'].active}" src="img/glow.png">
     </div>
-    <div class="control" ng-repeat="(name, control) in controls"
+    <div class="control" ng-repeat="(name, control) in deviceState.controls"
          ng-class="[name, {active:control.active}]"
-         ng-click="control.action(control)">
+         ng-click="control.action(name)">
         <div class="state-indicator"></div>
         <h1 class="control-head">{{::control.title}}</h1>
     </div>
 </div>
-
-
-<http-indicator></http-indicator>

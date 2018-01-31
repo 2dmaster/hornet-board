@@ -1,3 +1,4 @@
-run.$inject = ['$rootScope'];
-export default function run($rootScope) {
+run.$inject = ['$loading'];
+export default function run($loading) {
+    $loading.setStatus(false);
 }

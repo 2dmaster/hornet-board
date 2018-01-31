@@ -5,10 +5,61 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <title>Hornet</title>
         <link rel="stylesheet" type="text/css" href="bundle.min.css">
+        <style>
+            .loading {
+                position: fixed;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1;
+            }
+            .loading.active{
+                display: flex;
+            }
+            .loading.inactive{
+                display: none;
+            }
+            .loading .circle-loader {
+                background-color: transparent;
+                fill: transparent;
+                stroke: #d82d3f;
+                stroke-width: 3;
+                animation: dash 1.5s ease infinite, rotate 1.5s linear infinite;
+            }
+
+            @keyframes dash {
+                0% {
+                    stroke-dasharray: 1,95;
+                    stroke-dashoffset: 0;
+                }
+                50% {
+                    stroke-dasharray: 85,95;
+                    stroke-dashoffset: -25;
+                }
+                100% {
+                    stroke-dasharray: 85,95;
+                    stroke-dashoffset: -93;
+                }
+            }
+
+            @keyframes rotate {
+                0% {transform: rotate(0deg); }
+                100% {transform: rotate(360deg); }
+            }
+        </style>
     </head>
     <body>
+    <div class="loading" ng-class="{active:$loading.active, inactive:!$loading.active}">
+        <svg class="circle-loader progress" width="40" height="40" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="15"></circle>
+        </svg>
+    </div>
         <div ng-view class="root"></div>
-        <script type="text/javascript" src="cordova.js"></script>
+        <!--<script type="text/javascript" src="cordova.js"></script>-->
         <script type="text/javascript" src="vendors.min.js"></script>
         <script type="text/javascript" src="bundle.min.js"></script>
     </body>
