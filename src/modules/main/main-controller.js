@@ -56,7 +56,8 @@ export default function mainCtrl($scope, $bluetooth, $loading, $commands, $contr
     };
 
     $scope.processControl = function (control) {
-        console.log(control.device+$utils.delimit(control.command));
+        $scope.send(control.device+$utils.delimit(control.command));
+        // console.log(control.device+$utils.delimit(control.command));
     };
 
     $scope.dimmer = function (val) {
@@ -102,16 +103,16 @@ export default function mainCtrl($scope, $bluetooth, $loading, $commands, $contr
         $bluetooth.isConnected().then($scope.disconnectBluetooth($scope.deviceState.bluetooth.$index))
     };
 
-       // $bluetooth.isEnabled()
-       //     .then($bluetooth.getBoundedDevices, function (err) {
-       //         $bluetooth.enable()
-       //             .then($bluetooth.getBoundedDevices)
-       //             .then(function (devices) {
-       //                 return $scope.devices = devices;
-       //             })
-       //     }).then(function (devices) {
-       //         return $scope.devices = devices;
-       //     });
+       $bluetooth.isEnabled()
+           .then($bluetooth.getBoundedDevices, function (err) {
+               $bluetooth.enable()
+                   .then($bluetooth.getBoundedDevices)
+                   .then(function (devices) {
+                       return $scope.devices = devices;
+                   })
+           }).then(function (devices) {
+               return $scope.devices = devices;
+           });
 
        $scope.openPort = function() {
            $loading.setStatus(true);
@@ -176,8 +177,12 @@ export default function mainCtrl($scope, $bluetooth, $loading, $commands, $contr
 
        $scope.manageConnection= function(address, $index) {
            $bluetooth.isConnected().then(
-               $scope.connectBluetooth(address, $index),
-               $scope.disconnectBluetooth($index)
+               function () {
+                   $scope.disconnectBluetooth($index);
+               },
+               function () {
+                   $scope.connectBluetooth(address, $index);
+               }
            );
        };
     $scope.$on('$destroy', $scope.handleDestroy);

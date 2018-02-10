@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "webpack-build-debug": "webpack --env.NODE_ENV=development --config webpack.config.js",
     "webpack-build": "webpack -p --env.NODE_ENV=production --config webpack.config.js",
     "webpack-dev": "webpack --env.NODE_ENV=development --config webpack.config.js --watch",
     "cordova-android": "npm run webpack-build && cordova build android",
+    "cordova-android-debug": "npm run webpack-build-debug && cordova build android",
     "cordova-android-prod": "npm run webpack-build && cordova build android --release"
   },
   "author": "2dmaster",

@@ -150,6 +150,9 @@ $transitionSpeed: .3s;
     overflow-y: auto;
     .menu-item{
       margin: 10px 0;
+      &.devices{
+        overflow-y: auto;
+      }
     }
   }
   &.active{
