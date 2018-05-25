@@ -15,16 +15,24 @@ $transitionSpeed: .3s;
   align-items: center;
   justify-content: space-around;
   .control{
-    display: flex;
     width: 150px;
     height: 150px;
-    align-items: center;
-    justify-content: center;
     color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
     z-index: 1;
     border-radius: 100%;
-    background-color: #BDBDBD;
+    background-image: url('./img/locked.png');
+    background-size: contain;
+    overflow: visible;
+    position: relative;
+    .control-head{
+      margin-bottom: -35px;
+      color: #212121;
+    }
     &.active{
+      background-image: url('./img/unlocked.png');
       .control-head{
         opacity: 1;
       }

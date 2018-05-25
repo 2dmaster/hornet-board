@@ -27,7 +27,6 @@
     <div class="control" ng-repeat="(name, control) in deviceState.controls"
          ng-class="[name, {active:control.active}]"
          ng-click="control.action(name)">
-        <div class="state-indicator"></div>
         <h1 class="control-head">{{::control.title}}</h1>
     </div>
 </div>
