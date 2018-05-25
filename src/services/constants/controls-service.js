@@ -14,20 +14,6 @@ export default function controlsService($commands) {
             device:$commands.BUZZER,
             command:$commands.ON,
             active:false
-        },
-        // audio:{
-        //     name:'audio',
-        //     title:'Audio system',
-        //     device:$commands.AMP,
-        //     command:$commands.ON,
-        //     active:false
-        // },
-        // ambient:{
-        //     name:'ambient',
-        //     title:'Ambient light',
-        //     device:$commands.ILLUMINATION,
-        //     command:$commands.ON,
-        //     active:false
-        // }
+        }
     }
 }
