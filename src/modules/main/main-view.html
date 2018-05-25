@@ -1,25 +1,11 @@
 <ul class="main-menu" ng-class="{'active' : mainMenuVisible}">
     <li class="main-menu-content">
-        <div class="menu-item lights">
-            <input class="range-control"
-                   type="range"
-                   ng-change="dimmer(LIGHTS_INTENSITY)"
-                   ng-model="LIGHTS_INTENSITY" min="0" max="255">
-        </div>
-        <div class="menu-item lights">
-            <label>
-                <input type="checkbox"
-                       ng-change="doStrobe(strobe)"
-                       ng-model="strobe"
-                       ng-true-value="999">
-                Strobe
-            </label>
-        </div>
+        <div class="menu-item available-devices">Доступные устройства:</div>
         <ul class="menu-item devices">
             <li class="device" ng-repeat="device in devices" ng-class="{active:device.active}">
                 <div ng-click="manageConnection(device.address, $index)">
-                    <p>{{device.name}}</p>
-                    <p>{{device.address}}</p>
+                    <p class="device-text">{{device.name}}</p>
+                    <p class="device-text">{{device.address}}</p>
                 </div>
             </li>
         </ul>
@@ -38,9 +24,6 @@
     </li>
 </ul>
 <div class="control-panel">
-    <div class="effects">
-        <img class="glow" ng-class="{active:deviceState.controls['ambient'].active}" src="img/glow.png">
-    </div>
     <div class="control" ng-repeat="(name, control) in deviceState.controls"
          ng-class="[name, {active:control.active}]"
          ng-click="control.action(name)">

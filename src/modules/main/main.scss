@@ -1,75 +1,29 @@
 $baseYellow: #e7c439;
-$radius: 100% 20px;
+$radius: 0 0;
 $border: 3px solid $baseYellow;
-$statusBarHeight: 17%;
+$statusBarHeight: 54px;
 $controlAreaHeight: 83%;
 $transitionSpeed: .3s;
 .control-panel{
   display: flex;
-  flex-wrap: wrap;
   flex:100%;
   height: 100%;
-  padding-top: 12%;
-  background: url('./img/bg.jpg') left top no-repeat;
+  padding-top: $statusBarHeight;
+  background-color:#FFFFFF;
   position: relative;
-  .effects{
-    position: absolute;
-    left:0;
-    bottom:0;
-    height: 100%;
-    width: 100%;
-    z-index: 0;
-    .glow{
-      position: absolute;
-      top: 256px;
-      left: 66px;
-      opacity: 0;
-      transition: opacity $transitionSpeed ease;
-      &.active{
-        opacity: 1;
-      }
-    }
-  }
-
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
   .control{
     display: flex;
-    flex:50%;
-    height: 50%;
+    width: 150px;
+    height: 150px;
+    align-items: center;
+    justify-content: center;
+    color: white;
     z-index: 1;
-    .state-indicator{
-      width: 5px;
-      height: 50%;
-      background-color: $baseYellow;
-      opacity: .1;
-      border-radius: 3px;
-      margin: 5px;
-      transition: opacity $transitionSpeed ease;
-    }
-    &.lights,
-    &.ambient{
-      flex-direction: row-reverse;
-    }
-    &.trunk,
-    &.audio{
-      justify-content: flex-start;
-    }
-    &.trunk,
-    &.lights{
-      align-items: flex-start;
-    }
-    &.audio,
-    &.ambient{
-      align-items: flex-end;
-    }
-    .control-head{
-      text-transform: uppercase;
-      margin: 5px 0;
-      font-weight: 100;
-      font-size: 14px;
-      color: white;
-      opacity: .5;
-      transition: opacity $transitionSpeed ease;
-    }
+    border-radius: 100%;
+    background-color: #BDBDBD;
     &.active{
       .control-head{
         opacity: 1;
@@ -85,7 +39,7 @@ $transitionSpeed: .3s;
   display: flex;
   justify-content: space-between;
   height: $statusBarHeight;
-  background-color: #1c1c1c;
+  background-color: #0288D1;
   .status{
     display: flex;
     justify-content: center;
@@ -128,42 +82,43 @@ $transitionSpeed: .3s;
 
 .main-menu{
   z-index: 10;
-  background-color: #5d5d5d;
-  display: flex;
-  flex-direction: column;
-  flex:100%;
+  background-color: #03A9F4;
   position: absolute;
-  transform: translateY(-$controlAreaHeight);
   top:0;
   width: 100%;
-  height: 100%;
-  transition: transform $transitionSpeed ease;
-  border-bottom-right-radius: $radius;
-  border-bottom-left-radius: $radius;
+  height: $statusBarHeight;
+  overflow: visible;
   border-bottom: $border;
-  overflow: hidden;
   .main-menu-content{
-    padding: 15px;
+    transition: transform $transitionSpeed ease;
+    transform: translateX(-100%);
+    position: fixed;
+    padding-top: $statusBarHeight;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    height: $controlAreaHeight;
+    height: 100%;
     overflow-y: auto;
     .menu-item{
-      margin: 10px 0;
+      &.available-devices{
+        background-color: #03A9F4;
+        padding: 15px 20px;
+        color: white;
+        width: 80%;
+      }
       &.devices{
+        background-color: #03A9F4;
+        width: 80%;
+        height: 100%;
         overflow-y: auto;
       }
     }
   }
   &.active{
-    transform: translateY(0);
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-    border-bottom: none;
+    .main-menu-content{
+      transform: translateX(0);
+    }
     .status-bar{
-      border-top-right-radius: $radius;
-      border-top-left-radius: $radius;
-      border-top: $border;
       .btn-main-menu{
         justify-content: center;
         .stripe{
@@ -185,7 +140,12 @@ $transitionSpeed: .3s;
 
 .device{
   color:white;
+  padding: 5px 20px;
+  margin-bottom: 5px;
+  .device-text{
+    margin: 0;
+  }
   &.active{
-    background-color: green;
+    background-color: #CDDC39;
   }
 }
